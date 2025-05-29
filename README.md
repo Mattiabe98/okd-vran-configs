@@ -1,5 +1,5 @@
 # OKD vRAN Configuration
-This repository contains some very useful .yaml files to get your OKD single node deployment up and running easily.
+This repository contains some very useful .yaml files to get your OKD single node deployment up and running easily for a vRAN workload.
 To install them, just run "oc apply -f filename.yaml" on your client with oc installed.
 
 Some files can be installed as is, such as:
