@@ -1,0 +1,16 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: master
+  name: 99-insecure-local-repo
+spec:
+  config:
+    ignition:
+      version: 3.4.0
+    storage:
+      files:
+        - path: /etc/containers/registries.conf
+          mode: 0644
+          contents:
+            source: data:text/plain;charset=utf-8;base64,dW5xdWFsaWZpZWQtc2VhcmNoLXJlZ2lzdHJpZXMgPSBbJ3JlZ2lzdHJ5LmFjY2Vzcy5yZWRoYXQuY29tJywgJ2RvY2tlci5pbyddCgpbW3JlZ2lzdHJ5XV0KbG9jYXRpb24gPSAiMTAuMjIuMTcuMTU2OjUwMDAiCmluc2VjdXJlID0gdHJ1ZQo=

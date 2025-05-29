@@ -1,0 +1,20 @@
+﻿apiVersion: performance.openshift.io/v2
+kind: PerformanceProfile
+metadata:
+  name: srsran-profile
+  annotations:
+    kubeletconfig.experimental: |
+      {"allowedUnsafeSysctls":["net.ipv4.ip_forward"]}
+spec:
+  cpu:
+    reserved: "0-3"
+    isolated: "4-63"
+  machineConfigPoolSelector:
+    pools.operator.machineconfiguration.openshift.io/master: ""
+  globallyDisableIrqLoadBalancing: true
+  workloadHints:
+    highPowerConsumption: false
+    perPodPowerManagement: false
+    realTime: false
+  nodeSelector:
+    node-role.kubernetes.io/master: ""

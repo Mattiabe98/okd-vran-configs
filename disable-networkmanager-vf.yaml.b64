@@ -1,0 +1,5 @@
+[main]
+plugins=keyfile
+
+[keyfile]
+unmanaged-devices=interface-name:ens2f2v1

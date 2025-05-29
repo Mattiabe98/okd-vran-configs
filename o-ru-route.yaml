@@ -1,0 +1,33 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: add-static-route-to-o-ru
+  labels:
+    machineconfiguration.openshift.io/role: master
+spec:
+  config:
+    ignition:
+      version: 3.4.0
+    systemd:
+      units:
+        - name: static-route.service
+          enabled: true
+          contents: |
+            [Unit]
+            Description=Add static route to O-RU
+            Requires=network-online.target
+            After=network-online.target create-vfs.service
+
+            [Service]
+            Type=oneshot
+            RemainAfterExit=true
+            ExecStart=/bin/bash /usr/local/bin/add-static-route.sh
+
+            [Install]
+            WantedBy=multi-user.target
+    storage:
+      files:
+        - path: /usr/local/bin/add-static-route.sh
+          contents:
+            source: data:text/plain;base64,IyEvYmluL2Jhc2gKIyBBZGQgc3RhdGljIHJvdXRlIHRvIE8tUlUKCmZvciBpIGluIHsxLi4xMH07IGRvCiAgaWYgaXAgbGluayBzaG93IGVuczJmMnYxID4gL2Rldi9udWxsIDI+JjE7IHRoZW4KICAgIGJyZWFrCiAgZmkKICBlY2hvICJXYWl0aW5nIGZvciBlbnMyZjJ2MS4uLiIKICBzbGVlcCAxCmRvbmUKCmlwIHJvdXRlIGFkZCAxMC4yMi4xNy4xNDMvMzIgZGV2IGVuczJmMnYxCmlwIHJvdXRlIGFkZCAxMC4yMi4xNy4xNDQvMzIgZGV2IGVuczJmMnYxCg==
+          mode: 0755

@@ -1,0 +1,34 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: 99-bind-vfio-vf
+  labels:
+    machineconfiguration.openshift.io/role: master
+spec:
+  config:
+    ignition:
+      version: 3.4.0
+    systemd:
+      units:
+        - name: bind-vfio-vf.service
+          enabled: true
+          contents: |
+            [Unit]
+            Description=Bind 0000:51:11.0 VF to vfio-pci
+            Requires=network-online.target create-vfs.service
+            After=network-online.target create-vfs.service
+
+            [Service]
+            Type=oneshot
+            RemainAfterExit=true
+            ExecStart=/bin/bash -c 'modprobe vfio-pci'
+            #ExecStart=/bin/bash -c 'echo 0000:51:11.0 > /sys/bus/pci/devices/0000:51:11.0/driver/unbind'
+            #ExecStart=/bin/bash -c 'echo 0000:51:11.4 > /sys/bus/pci/devices/0000:51:11.4/driver/unbind'
+            #ExecStart=/bin/bash -c 'echo 0000:51:11.6 > /sys/bus/pci/devices/0000:51:11.6/driver/unbind'
+            #ExecStart=/bin/bash -c 'echo 0000:51:09.0 > /sys/bus/pci/devices/0000:51:09.0/driver/unbind'
+            #ExecStart=/bin/bash -c 'echo 0000:51:09.2 > /sys/bus/pci/devices/0000:51:09.2/driver/unbind'
+            #ExecStart=/bin/bash -c 'echo 0000:51:09.4 > /sys/bus/pci/devices/0000:51:09.4/driver/unbind'
+            #ExecStart=/bin/bash -c 'echo 8086 1889 > /sys/bus/pci/drivers/vfio-pci/new_id'
+
+            [Install]
+            WantedBy=multi-user.target

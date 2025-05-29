@@ -1,0 +1,29 @@
+---------------
+CHECK INTERFACE NAME. CAN ALSO BE DONE VIA SSH ON NODE.
+---------------
+apiVersion: machine.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: 99-disable-nm-wait-for-ens2f2
+  labels:
+    machineconfiguration.openshift.io/role: worker
+spec:
+  config:
+    ignition:
+      version: 3.1.0
+    systemd:
+      units:
+      - name: disable-nm-wait-for-ens2f2.service
+        enabled: true
+        contents: |
+          [Unit]
+          Description=Disable NetworkManager wait for ens2f2
+          After=network.target
+
+          [Service]
+          Type=oneshot
+          ExecStart=/usr/bin/nmcli connection modify "Wired connection 7" connection.autoconnect no
+          ExecStartPost=/usr/bin/nmcli connection modify "Wired connection 7" connection.wait-device-timeout 0
+
+          [Install]
+          WantedBy=multi-user.target

@@ -1,0 +1,13 @@
+#!/bin/bash
+# Add static route to O-RU
+
+for i in {1..10}; do
+  if ip link show ens2f2v1 > /dev/null 2>&1; then
+    break
+  fi
+  echo "Waiting for ens2f2v1..."
+  sleep 1
+done
+
+ip route add 10.22.17.143/32 dev ens2f2v1
+ip route add 10.22.17.144/32 dev ens2f2v1
