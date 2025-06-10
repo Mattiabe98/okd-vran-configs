@@ -14,7 +14,7 @@ done
 # Initialize ens2f1 VF
 for i in {1..10}; do
   if [[ -e /sys/class/net/ens2f1 ]]; then
-    echo 6 > /sys/class/net/ens2f1/device/sriov_numvfs
+    echo 9 > /sys/class/net/ens2f1/device/sriov_numvfs
     break
   fi
   echo "Waiting for ens2f1 to appear..."
@@ -97,3 +97,15 @@ ip link set ens2f1 vf 2 spoofchk off
 ip link set ens2f1v2 mtu 9000
 ip link set ens2f1 vf 4 spoofchk off
 ip link set ens2f1v4 mtu 9000
+
+# New VF for triband
+# CU Triband
+ip link set ens2f1 vf 6 mac 00:1D:AC:00:11:00 vlan 0
+# DU Triband - O-RU Triband
+ip link set ens2f1 vf 7 mac 72:0e:9b:5f:82:e0 vlan 0
+# DU Triband - CU Triband
+ip link set ens2f1 vf 8 mac 00:1D:AC:00:11:01 vlan 0
+
+# Misc
+ip link set ens2f1 vf 7 spoofchk off
+ip link set ens2f1v7 mtu 9000
