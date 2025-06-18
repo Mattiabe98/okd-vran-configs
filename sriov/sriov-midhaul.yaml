@@ -171,7 +171,7 @@ apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
   name: sriov-midhaul-cu-triband
-  namespace: srs72
+  namespace: srsran-triband
   annotations:
     k8s.v1.cni.cncf.io/resourceName: intel.com/intel_sriov_netdevice_ens2f1
 spec:
@@ -195,7 +195,7 @@ apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
   name: sriov-midhaul-du-triband
-  namespace: srs72
+  namespace: srsran-triband
   annotations:
     k8s.v1.cni.cncf.io/resourceName: intel.com/intel_sriov_netdevice_ens2f1
 spec:
