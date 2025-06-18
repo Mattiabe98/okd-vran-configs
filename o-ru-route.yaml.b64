@@ -11,3 +11,4 @@ done
 
 ip route add 10.22.17.143/32 dev ens2f2v1
 ip route add 10.22.17.144/32 dev ens2f2v1
+ip route add 10.22.1

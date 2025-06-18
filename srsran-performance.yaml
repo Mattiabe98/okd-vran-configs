@@ -14,7 +14,7 @@ spec:
       #Command line arguments passed to the kernel at system boot time
       #Any changes here will only take effect after reboot.
       cmdline_openshift_node_custom=+skew_tick=1 nosoftlockup nmi_watchdog=0 crashkernel=auto softlockup_panic=0 audit=0 mce=off mitigations=off tsc=nowatchdog tsc=reliable kthread_cpus=0-3 intel_iommu=on iommu=pt isolcpus=4-63 irqaffinity=0-3 rcu_nocbs=4-63 rcu_nocb_poll
-      cmdline_openshift_node_hugepages=hugepagesz=1G hugepages=48
+      cmdline_openshift_node_hugepages=hugepagesz=1G hugepages=64
       [cpu]
       #energy_perf_bias=performance
       force_latency=
