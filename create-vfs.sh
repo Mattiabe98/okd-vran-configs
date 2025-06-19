@@ -63,6 +63,10 @@ ip link set ens2f2 vf 4 spoofchk off
 ip link set ens2f2v4 mtu 9000
 ip link set ens2f2 vf 6 spoofchk off
 ip link set ens2f2v6 mtu 9000
+ip link set ens2f2v2 mtu 9000
+ip link set ens2f2v3 mtu 9000
+ip link set ens2f2v5 mtu 9000
+ip link set ens2f2v7 mtu 9000
 
 ############### O-RU 0 SETUP #################
 
@@ -97,6 +101,9 @@ ip link set ens2f1 vf 2 spoofchk off
 ip link set ens2f1v2 mtu 9000
 ip link set ens2f1 vf 4 spoofchk off
 ip link set ens2f1v4 mtu 9000
+ip link set ens2f1v1 mtu 9000
+ip link set ens2f1v3 mtu 9000
+ip link set ens2f1v5 mtu 9000
 
 # New VF for triband
 # CU Triband
