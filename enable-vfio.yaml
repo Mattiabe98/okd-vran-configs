@@ -14,21 +14,14 @@ spec:
           enabled: true
           contents: |
             [Unit]
-            Description=Bind 0000:51:11.0 VF to vfio-pci
-            Requires=network-online.target create-vfs.service
+            Description=Load vfio-pci device driver
+            Requires=network-online.target create-vfs.service # Start this service only after VFs have been configured
             After=network-online.target create-vfs.service
 
             [Service]
             Type=oneshot
             RemainAfterExit=true
             ExecStart=/bin/bash -c 'modprobe vfio-pci'
-            #ExecStart=/bin/bash -c 'echo 0000:51:11.0 > /sys/bus/pci/devices/0000:51:11.0/driver/unbind'
-            #ExecStart=/bin/bash -c 'echo 0000:51:11.4 > /sys/bus/pci/devices/0000:51:11.4/driver/unbind'
-            #ExecStart=/bin/bash -c 'echo 0000:51:11.6 > /sys/bus/pci/devices/0000:51:11.6/driver/unbind'
-            #ExecStart=/bin/bash -c 'echo 0000:51:09.0 > /sys/bus/pci/devices/0000:51:09.0/driver/unbind'
-            #ExecStart=/bin/bash -c 'echo 0000:51:09.2 > /sys/bus/pci/devices/0000:51:09.2/driver/unbind'
-            #ExecStart=/bin/bash -c 'echo 0000:51:09.4 > /sys/bus/pci/devices/0000:51:09.4/driver/unbind'
-            #ExecStart=/bin/bash -c 'echo 8086 1889 > /sys/bus/pci/drivers/vfio-pci/new_id'
 
             [Install]
             WantedBy=multi-user.target
