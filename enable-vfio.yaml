@@ -14,7 +14,7 @@ spec:
           enabled: true
           contents: |
             [Unit]
-            Description=Load vfio-pci device driver
+            Description=Load vfio-pci device driver for DPDK VFs
             Requires=network-online.target create-vfs.service # Start this service only after VFs have been configured
             After=network-online.target create-vfs.service
 
